@@ -13,6 +13,7 @@
     'yusulhwa','yeonmuyeong','namharyeong','cheonyeongbaek','al1',
     'edgar','mascot'
   ];
+  const introAssetPath = new URL('assets/img/intro/', document.baseURI).href;
   let introDone = false;
   const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -34,7 +35,7 @@
     finishIntro();
   } else {
     // The small intro assets are used only for the fast character montage.
-    guests.forEach(name => { const img = new Image(); img.src = `/assets/img/intro/${name}_illust.webp`; });
+    guests.forEach(name => { const img = new Image(); img.src = `${introAssetPath}${name}_illust.webp`; });
     (async () => {
       await wait(350);
       if (introDone) return;
@@ -53,7 +54,7 @@
       for (let i = 0; i < guests.length; i++) {
         if (introDone) return;
         const img = document.createElement('img');
-        img.src = `/assets/img/intro/${guests[i]}_illust.webp`;
+        img.src = `${introAssetPath}${guests[i]}_illust.webp`;
         img.alt = '';
         img.className = `guest ${i % 2 ? 'right' : 'left'}`;
         guestLayer.append(img);

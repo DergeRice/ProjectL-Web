@@ -9,8 +9,8 @@
     const android = /Android/i.test(navigator.userAgent) && !/Windows Phone/i.test(navigator.userAgent);
     const fromSite = document.referrer.startsWith(location.origin);
     if (android && !fromSite) location.replace('https://play.google.com/store/apps/details?id=com.orstudio.Pmachina&pcampaignid=web_share');
-    else location.replace('/#download');
+    else location.replace('../#download');
   </script>
 </head>
-<body><p><a href="/&#35;download">프로젝트 마키나 다운로드 및 iOS 사전예약</a></p></body>
+<body><p><a href="../#download">프로젝트 마키나 다운로드 및 iOS 사전예약</a></p></body>
 </html>
