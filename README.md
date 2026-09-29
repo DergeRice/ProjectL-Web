@@ -10,6 +10,7 @@
 | `index.html` | HOME |
 | `home/` | 옛 주소 `/home` → `/` 리다이렉트 |
 | `game/`, `introduce/`, `about/`, `journey/` | 각 메뉴 페이지 |
+| `download/` | 스토어 다운로드 페이지 (외부 링크로 들어온 Android는 Google Play로 자동 이동. iOS 출시 시 App Store 버튼 활성화 필요) |
 | `more/` | 계정 삭제 안내 + 약관 목록 |
 | `more/<한글-슬러그>/` | 약관·개인정보 문서 (Google Sites 시절 URL 그대로 유지 — 스토어/앱에 등록된 링크가 깨지지 않도록 **경로 변경 금지**) |
 | `assets/style.css` | 공통 스타일 |
