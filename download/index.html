@@ -66,33 +66,37 @@
                     </a>
                     <a class="store upcoming" data-platform="ios" href="#ios-notify">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.7c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.6 1.3-.1 1.7-.8 3.3-.8 1.5 0 1.9.8 3.3.8 1.4 0 2.2-1.3 3-2.5 1-1.4 1.3-2.7 1.4-2.8-.1 0-2.6-1-2.4-4.2ZM13.9 5.1c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4Z"/></svg>
-                        <span><small>COMING SOON</small>App Store 출시 알림 받기</span>
+                        <span><small>COMING SOON</small>App Store 사전예약</span>
                     </a>
                 </div>
 
-                <!-- iOS 출시 알림 신청: Google Forms formResponse로 전송되어 연결된 스프레드시트에 쌓인다. -->
-                <form class="notify" id="ios-notify" action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST">
-                    <h2>iOS 출시 알림 신청</h2>
-                    <p class="notify-lead">App Store 출시 소식을 이메일로 가장 먼저 알려드립니다.</p>
+                <!-- iOS 사전예약: Google Forms "[프로젝트 마키나] 사전예약"의 formResponse로 전송되어 연결된 스프레드시트에 쌓인다.
+                     체크박스 value는 Google Form 옵션 문구와 정확히 같아야 저장된다. -->
+                <form class="notify" id="ios-notify" action="https://docs.google.com/forms/d/e/1FAIpQLSfv54ZTvAfOYo8kwQytRsmWUeG_VRS2t_Kp4L-P0YA4iBBMJg/formResponse" method="POST">
+                    <h2>iOS 사전예약</h2>
+                    <p class="notify-lead">App Store 출시일에 이메일로 가장 먼저 알려드립니다.</p>
                     <div class="notify-row">
                         <label class="sr-only" for="notify-email">이메일 주소</label>
-                        <input id="notify-email" type="email" name="entry.ENTRY_EMAIL" placeholder="이메일 주소" autocomplete="email" required>
-                        <button type="submit">알림 신청</button>
+                        <input id="notify-email" type="email" name="entry.1000022" placeholder="이메일 주소" autocomplete="email" required>
+                        <button type="submit">사전예약</button>
                     </div>
                     <label class="notify-consent">
-                        <input type="checkbox" name="entry.ENTRY_CONSENT" value="동의합니다" required>
-                        <span>[필수] 개인정보 수집·이용에 동의합니다.</span>
+                        <input type="checkbox" name="entry.846997345" value="개인정보 처리 방침 이용 동의" required>
+                        <span>[필수] <a href="/more/개인정보-처리-방침/" target="_blank">개인정보 처리 방침</a> 이용 동의</span>
+                    </label>
+                    <label class="notify-consent">
+                        <input type="checkbox" name="entry.825085978" value="서비스 이용 약관 동의" required>
+                        <span>[필수] <a href="/more/서비스-이용약관/" target="_blank">서비스 이용 약관</a> 동의</span>
                     </label>
                     <details class="notify-terms">
-                        <summary>내용 보기</summary>
+                        <summary>개인정보 수집·이용 내용 보기</summary>
                         <ul>
                             <li>수집 항목: 이메일</li>
-                            <li>수집 목적: &lt;프로젝트 마키나&gt; iOS(App Store) 출시 알림 발송</li>
-                            <li>보유 기간: 출시 알림 발송 후 지체 없이 파기 (동의 철회 시 즉시 파기)</li>
-                            <li>동의를 거부할 수 있으며, 거부 시 출시 알림을 받을 수 없습니다.</li>
+                            <li>수집 목적: &lt;프로젝트 마키나&gt; iOS(App Store) 출시 소식 이메일 발송</li>
+                            <li>보유 기간: 출시 안내 발송 후 지체 없이 파기 (동의 철회 시 즉시 파기)</li>
+                            <li>동의를 거부할 수 있으며, 거부 시 사전예약 및 출시 안내를 받을 수 없습니다.</li>
                             <li>동의 철회 문의: <a href="mailto:management1423@orstudios.net">management1423@orstudios.net</a></li>
                         </ul>
-                        <p>자세한 내용은 <a href="/more/개인정보-처리-방침/">개인정보 처리 방침</a>을 확인해 주세요.</p>
                     </details>
                     <p class="notify-status" role="status" aria-live="polite"></p>
                 </form>
@@ -109,16 +113,16 @@
                 {
                     e.preventDefault();
                     button.disabled = true;
-                    status.textContent = '신청 중입니다…';
+                    status.textContent = '사전예약 중입니다…';
                     try
                     {
                         await fetch(form.action, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(form)) });
                         form.reset();
-                        status.textContent = '신청이 완료되었습니다. 출시되면 이메일로 알려드릴게요!';
+                        status.textContent = '사전예약이 완료되었습니다. 출시일에 이메일로 알려드릴게요!';
                     }
                     catch (err)
                     {
-                        status.textContent = '신청에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+                        status.textContent = '사전예약에 실패했습니다. 잠시 후 다시 시도해 주세요.';
                     }
                     button.disabled = false;
                 });

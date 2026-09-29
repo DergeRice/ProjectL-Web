@@ -444,6 +444,16 @@ a.store:focus-visible
     cursor: pointer;
 }
 
+.notify-consent a
+{
+    color: #8fd3c9;
+}
+
+.notify-consent + .notify-consent
+{
+    margin-top: 8px;
+}
+
 .notify-consent input
 {
     width: 18px;
