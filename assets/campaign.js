@@ -25,16 +25,13 @@
     frame.classList.add('dismissed');
     cast.classList.remove('player-show');
     guestLayer.replaceChildren();
-    try { sessionStorage.setItem('machina-intro-seen', '1'); } catch (_) {}
   }
 
   skip.addEventListener('click', finishIntro);
-  let alreadySeen = false;
-  try { alreadySeen = sessionStorage.getItem('machina-intro-seen') === '1'; } catch (_) {}
-  if (reducedMotion || alreadySeen) {
+  if (reducedMotion) {
     finishIntro();
   } else {
-    // The small intro assets are used only for the fast character montage.
+    // Keep the next character frames decoded before the rapid montage begins.
     guests.forEach(name => { const img = new Image(); img.src = `${introAssetPath}${name}_illust.webp`; });
     (async () => {
       await wait(350);
