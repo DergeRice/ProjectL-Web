@@ -1,0 +1,392 @@
+:root
+{
+    --black: #000;
+    --text: #212121;
+    --accent: #138275;
+    --max: 1150px;
+}
+
+*
+{
+    box-sizing: border-box;
+}
+
+html
+{
+    scroll-behavior: smooth;
+}
+
+body
+{
+    margin: 0;
+    font-family: Lato, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    color: var(--text);
+    background: #fff;
+    line-height: 1.6;
+}
+
+img
+{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a
+{
+    color: inherit;
+}
+
+/* 헤더 */
+.site-header
+{
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding: 12px 28px;
+}
+
+.site-header .logo img
+{
+    height: 32px;
+    width: auto;
+}
+
+.site-header nav > ul
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-header nav a,
+.site-header nav summary
+{
+    font-size: 14px;
+    letter-spacing: .02em;
+    text-decoration: none;
+    color: #666;
+    cursor: pointer;
+}
+
+.site-header nav a:hover,
+.site-header nav a[aria-current="page"],
+.site-header nav summary:hover
+{
+    color: #000;
+}
+
+.site-header nav a[aria-current="page"]
+{
+    font-weight: 700;
+}
+
+/* MORE 드롭다운 */
+.dropdown
+{
+    position: relative;
+}
+
+.dropdown summary
+{
+    list-style: none;
+}
+
+.dropdown summary::-webkit-details-marker
+{
+    display: none;
+}
+
+.dropdown summary::after
+{
+    content: " ▾";
+}
+
+.dropdown ul
+{
+    position: absolute;
+    right: 0;
+    top: 28px;
+    min-width: 220px;
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+}
+
+.dropdown ul a
+{
+    display: block;
+    padding: 8px 16px;
+    color: var(--text) !important;
+}
+
+.dropdown ul a:hover
+{
+    background: #f2f2f2;
+}
+
+/* 어두운 배너 위 헤더 */
+.on-hero .site-header .logo img
+{
+    filter: invert(1);
+}
+
+.on-hero .site-header nav > ul > li > a,
+.on-hero .site-header nav summary
+{
+    color: rgba(255, 255, 255, .8);
+}
+
+.on-hero .site-header nav > ul > li > a:hover,
+.on-hero .site-header nav > ul > li > a[aria-current="page"],
+.on-hero .site-header nav summary:hover
+{
+    color: #fff;
+}
+
+/* 페이지 배너 */
+.hero
+{
+    height: 520px;
+    background: url("img/hero-bg.webp") center / cover no-repeat;
+}
+
+.page-title
+{
+    margin: 0;
+    padding: 40px 16px 24px;
+    text-align: center;
+    font-family: Oswald, Impact, sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+
+/* 섹션 */
+.section
+{
+    padding: 24px 16px;
+}
+
+.section.dark
+{
+    background: var(--black);
+    color: #fff;
+}
+
+.section .inner
+{
+    max-width: var(--max);
+    margin: 0 auto;
+}
+
+.stack > * + *
+{
+    margin-top: 48px;
+}
+
+.banner-link
+{
+    position: relative;
+    display: block;
+}
+
+.play-link
+{
+    position: absolute;
+    left: 4.8%;
+    top: 75.5%;
+    width: 18.2%;
+    height: 8.5%;
+    border-radius: 999px;
+}
+
+.play-link:focus-visible
+{
+    outline: 3px solid var(--accent);
+}
+
+/* 캐러셀 */
+.carousel
+{
+    position: relative;
+}
+
+.carousel .track
+{
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.carousel .track::-webkit-scrollbar
+{
+    display: none;
+}
+
+.carousel .track img
+{
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+}
+
+.carousel .arrow
+{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.carousel .arrow:hover
+{
+    background: rgba(255, 255, 255, .3);
+}
+
+.carousel .prev
+{
+    left: 8px;
+}
+
+.carousel .next
+{
+    right: 8px;
+}
+
+.carousel .dots
+{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 0 8px;
+}
+
+.carousel .dots button
+{
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #bbb;
+    cursor: pointer;
+}
+
+.carousel .dots button[aria-current="true"]
+{
+    background: var(--accent);
+}
+
+/* 약관/안내 문서 */
+.doc
+{
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 96px 16px 64px;
+    font-size: 16px;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+.doc h1,
+.doc h2
+{
+    line-height: 1.4;
+}
+
+.doc p
+{
+    margin: 0 0 .6em;
+}
+
+.doc .center
+{
+    text-align: center;
+}
+
+.doc a
+{
+    color: var(--accent);
+}
+
+.doc-list
+{
+    padding-left: 1.2em;
+}
+
+.doc-list li
+{
+    margin: .4em 0;
+}
+
+.site-footer
+{
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+}
+
+.site-footer a
+{
+    margin: 0 8px;
+}
+
+@media (max-width: 720px)
+{
+    .site-header
+    {
+        padding: 10px 16px;
+    }
+
+    .site-header nav > ul
+    {
+        gap: 4px 14px;
+    }
+
+    .site-header nav a,
+    .site-header nav summary
+    {
+        font-size: 13px;
+    }
+
+    .hero
+    {
+        height: 240px;
+    }
+
+    .page-title
+    {
+        font-size: 32px;
+        padding-top: 28px;
+    }
+
+    .doc
+    {
+        padding-top: 110px;
+        font-size: 15px;
+    }
+
+    .carousel .arrow
+    {
+        display: none;
+    }
+}
