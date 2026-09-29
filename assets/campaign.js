@@ -28,12 +28,11 @@
   }
 
   skip.addEventListener('click', finishIntro);
-  if (reducedMotion) {
-    finishIntro();
-  } else {
-    // Keep the next character frames decoded before the rapid montage begins.
-    guests.forEach(name => { const img = new Image(); img.src = `${introAssetPath}${name}_illust.webp`; });
-    (async () => {
+  // The laboratory entrance is the first-view experience on every device.
+  // Keep it independent from the browser's reduced-motion preference so iOS
+  // users do not skip straight to the page when that system setting is active.
+  guests.forEach(name => { const img = new Image(); img.src = `${introAssetPath}${name}_illust.webp`; });
+  (async () => {
       await wait(350);
       if (introDone) return;
       doors.classList.add('open');
@@ -63,10 +62,9 @@
       document.querySelector('.scene-flash').classList.add('fire');
       await wait(260);
       finishIntro();
-    })();
-    // A stalled image request should never prevent access to the page.
-    setTimeout(finishIntro, 8000);
-  }
+  })();
+  // A stalled image request should never prevent access to the page.
+  setTimeout(finishIntro, 8000);
 
   const slides = [...document.querySelectorAll('.market-slide')];
   const dotsContainer = document.querySelector('.market-dots');
