@@ -6,7 +6,7 @@
   const cast = document.querySelector('.characters');
   const guestLayer = document.getElementById('character-guest');
   const status = document.getElementById('intro-status');
-  const skip = document.querySelector('.skip-intro');
+  const compactViewport = matchMedia('(max-width: 760px)').matches;
   const guests = [
     'alicia','joker','alex','eve','silver','leon','zoey','segria',
     'kylian','leah','rodrick','kira','langley','kaeran','luna1',
@@ -14,6 +14,7 @@
     'edgar','mascot'
   ];
   const introAssetPath = new URL('assets/img/intro/', document.baseURI).href;
+  const montageGuests = compactViewport ? guests.filter((_, index) => index % 2 === 0) : guests;
   let introDone = false;
   const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -27,12 +28,11 @@
     guestLayer.replaceChildren();
   }
 
-  skip.addEventListener('click', finishIntro);
   // The laboratory entrance is the first-view experience on every device.
   // Keep it independent from the browser's reduced-motion preference so iOS
   // users do not skip straight to the page when that system setting is active.
   guests.forEach(name => { const img = new Image(); img.src = `${introAssetPath}${name}_illust.webp`; });
-  (async () => {
+  window.addEventListener('load', () => { (async () => {
       await wait(350);
       if (introDone) return;
       doors.classList.add('open');
@@ -43,28 +43,29 @@
       frame.classList.add('dismissed');
       cast.classList.add('player-show');
       status.textContent = '연구원 확인 완료';
-      await wait(700);
+      await wait(compactViewport ? 950 : 700);
       if (introDone) return;
       cast.classList.add('player-out');
       status.textContent = '마키나 데이터 스캔 중';
-      for (let i = 0; i < guests.length; i++) {
+      for (let i = 0; i < montageGuests.length; i++) {
         if (introDone) return;
         const img = document.createElement('img');
-        img.src = `${introAssetPath}${guests[i]}_illust.webp`;
+        img.src = `${introAssetPath}${montageGuests[i]}_illust.webp`;
         img.alt = '';
         img.className = `guest ${i % 2 ? 'right' : 'left'}`;
         guestLayer.append(img);
         setTimeout(() => img.remove(), 520);
-        await wait(185);
+        await wait(compactViewport ? 260 : 185);
       }
       if (introDone) return;
       status.textContent = 'PROJECT MACHINA';
       document.querySelector('.scene-flash').classList.add('fire');
       await wait(260);
       finishIntro();
-  })();
-  // A stalled image request should never prevent access to the page.
-  setTimeout(finishIntro, 8000);
+    })();
+    // A stalled image request should never prevent access to the page.
+    setTimeout(finishIntro, 10500);
+  }, { once: true });
 
   const slides = [...document.querySelectorAll('.market-slide')];
   const dotsContainer = document.querySelector('.market-dots');
